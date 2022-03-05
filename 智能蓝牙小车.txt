@@ -1,0 +1,80 @@
+int p1=3;
+int p2=5;
+int p3=6;
+int p4=9;
+int p5=13;
+
+void pin_init(){
+pinMode(p1,OUTPUT);
+pinMode(p2,OUTPUT);
+pinMode(p3,OUTPUT);
+pinMode(p4,OUTPUT); 
+pinMode(p5,OUTPUT);
+}
+
+void car_go(){
+digitalWrite(p1,HIGH);
+digitalWrite(p2,LOW);
+digitalWrite(p3,HIGH);
+digitalWrite(p4,LOW);
+digitalWrite(p5,HIGH);
+delay(1000);
+digitalWrite(p5,LOW);
+
+}
+void car_back(){
+digitalWrite(p1,LOW);
+digitalWrite(p2,HIGH);
+digitalWrite(p3,LOW);
+digitalWrite(p4,HIGH);
+}
+void car_left(){
+digitalWrite(p1,LOW);
+digitalWrite(p2,HIGH);
+digitalWrite(p3,HIGH);
+digitalWrite(p4,LOW);
+}
+void car_right(){
+digitalWrite(p1,HIGH);
+digitalWrite(p2,LOW);
+digitalWrite(p3,LOW);
+digitalWrite(p4,HIGH);  
+}
+void car_stop(){
+digitalWrite(p1,LOW);
+digitalWrite(p2,LOW);
+digitalWrite(p3,LOW);
+digitalWrite(p4,LOW);
+}
+
+
+void setup(){
+Serial.begin(9600);
+pin_init();
+}
+
+void loop(){
+
+if (Serial.available()>0){
+  char value=Serial.read();
+
+switch(value){
+     case'f':
+        car_go();
+     break;
+     case'b':
+        car_back();
+     break;
+     case'l':
+        car_left();
+     break;
+     case'r':
+        car_right();
+     break; 
+     case's':
+        car_stop();
+     break;  
+   }
+  
+  }
+}
